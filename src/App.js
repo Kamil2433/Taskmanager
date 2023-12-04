@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React from 'react';
+import LoginContext from './Context/LoginContext';
+import Login from './Components/Login';
+import Notescontext from './Context/NotesContext';
+import Dashboard from './Components/Dashboard';
+import Navbaruse from './Components/Navbaruse';
+import { useLogin } from './Context/LoginContext';
 
 function App() {
+
+
+    //  const {auth}=useLogin();
+    
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+       <LoginContext>
+        <Notescontext>
+
+
+
+    <div className=" h1 mt-3 ml-2">
+    <i class="fa-solid fa-note-sticky fa-xl" style={{color: "#10bbf4",margin:"4px"}}></i>
+    CloudNote 
+                 
     </div>
+
+   {/* if(name){
+      <Navbaruse/>
+    }else{
+      <div className='float-right'></div>} */}
+    
+   <Navbaruse/>
+
+    <Dashboard/>
+      
+
+      </Notescontext>
+       </LoginContext>
   );
 }
 
