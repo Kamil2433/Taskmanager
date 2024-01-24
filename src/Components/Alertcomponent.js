@@ -3,21 +3,26 @@ import {Container , Alert,} from 'react-bootstrap'
 import { useNotes } from '../Context/NotesContext';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLogin } from '../Context/LoginContext';
 
 
 function Alertcomponent(props) {  
 
     const {message,setalert,setmessage,variant,setvariant}=useNotes()
+    const {setmessagel,setvariantl}=useLogin()
+ 
 
     // const [Showalert,setalert]=useState(false)
     // const [message,setmessage]=useState('')
     useEffect(() => {
 
-      setTimeout(() => {
+      setTimeout(async() => {
         
-        setalert(false)
-        setmessage(null)
-        setvariant('success')
+       await setmessage(null)
+       await setalert(false)
+       await setvariant('success')
+       setmessagel(null)
+       setvariantl('success')
       }, 4000);
      
     }, []);
@@ -27,7 +32,7 @@ function Alertcomponent(props) {
   return (  
     <div className="App">  
    <Container className='p-4'>  
-   <Alert variant={variant}>
+   <Alert variant={props.variant}>
 
         {props.mess}    
     </Alert>  

@@ -23,7 +23,7 @@ function App() {
 
     <div className=" h1 mt-3 ml-2">
     <i class="fa-solid fa-note-sticky fa-xl" style={{color: "#10bbf4",margin:"4px"}}></i>
-    CloudNote 
+    TaskManager 
                  
     </div>
 

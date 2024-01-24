@@ -14,7 +14,7 @@ export default function Addnotemodal({onHide}) {
 
             const title=useRef();
             const description=useRef();
-
+    const date=useRef();
 
 
 
@@ -22,7 +22,7 @@ export default function Addnotemodal({onHide}) {
 
                 e.preventDefault();
 
-                addnote(title.current.value,description.current.value);
+                addnote(title.current.value,description.current.value,date.current.value);
                         onHide()
                         fetchnotes()
 
@@ -30,13 +30,12 @@ export default function Addnotemodal({onHide}) {
 
 
         
-
-
+         
   return (
     <>
     {/* <Modal.Header>Create New Note < closeButton></closeButton></Modal.Header> */}
     <ModalHeader >
-          <Modal.Title>Create New Note</Modal.Title>
+          <Modal.Title>Create New Task</Modal.Title>
           {/* <button className="btn-close">  */}
           {/* <button type="button" class="btn-close" aria-label="Close"></button> */}
           <button type="button" class="close" aria-label="Close">
@@ -62,7 +61,16 @@ export default function Addnotemodal({onHide}) {
                 {/* <Form.Control type="text" placeholder="Description " ref={description} /> */}
                 <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Description " ref={description} ></textarea>
               </Col>
+
             </Form.Group>
+              <Col >
+            <Form.Label column sm="2">
+             Due-date
+              </Form.Label>
+              </Col>
+            <Form.Control type="date" ref={date}/>
+
+
             <Button type="submit" variant="primary" >
               Create
             </Button>{" "}

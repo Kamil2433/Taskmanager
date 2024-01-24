@@ -16,9 +16,8 @@ import Alertcomponent from './Alertcomponent';
 
 function Navbaruse() {
 
-  const {setname,setid,setauth}=useLogin()
-  const {setnotes,Showalert,setalert,message,setmessage}=useNotes()
-
+  const {setname,setid,setauth,messagefromlogin,setvariantfromlogin}=useLogin()
+  const {setnotes,Showalert,setalert,message,setmessage,variant}=useNotes()
   const logout=()=>{
 
         setname('')
@@ -32,6 +31,8 @@ setnotes('')
   const {name}=useLogin()
    const string=name;
       const istrue=string.length==0;
+      const messagetodisplay=messagefromlogin||message;
+      const vari=setvariantfromlogin||variant;
 
   return (
 
@@ -43,7 +44,7 @@ setnotes('')
     <Container>
 
      {!istrue?
-     <a> {name}, Welcome to CloudNote </a>:
+     <a> {name}, Welcome to TaskManager </a>:
      <a>Welcome</a> }
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -60,7 +61,7 @@ setnotes('')
     </Container>
   </Navbar>
   {Showalert===true ?
-  <Alertcomponent    mess={message} />:
+  <Alertcomponent    mess={messagetodisplay} variant={vari}/>:
   <div></div>
   }
   </div>

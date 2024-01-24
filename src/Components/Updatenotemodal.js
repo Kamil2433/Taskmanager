@@ -46,7 +46,7 @@ export default function Updatenodemodal({onHide,giventitle,givendesc,givenid}) {
     <>
     {/* <Modal.Header>Create New Note < closeButton></closeButton></Modal.Header> */}
     <ModalHeader >
-          <Modal.Title>Update Note</Modal.Title>
+          <Modal.Title>Update Task</Modal.Title>
           {/* <button className="btn-close">  */}
           {/* <button type="button" class="btn-close" aria-label="Close"></button> */}
           <button type="button" class="close" aria-label="Close">

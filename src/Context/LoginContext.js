@@ -24,33 +24,37 @@ export default function LoginContext({children}) {
       // const {setalert,setmessage}=Notescontext()
 
       try {
-     const response=await fetch("http://localhost:3200/api/auth/",{
+     const response=await fetch('https://cloudnote-backend-etc8.onrender.com/api/auth/',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
         'Access-Control-Allow-Origin':'*'
+      
       },
       body:JSON.stringify({id:inputid,password:inputpassword})
       
     });
   const res=await response.json()
+ 
   
-  
-    if(response.status!==400){
+    if(response.ok){
 
       setauth(res);
       getname(inputid,inputpassword,res);
 
-      return response;
+      setmessagel("User Login Successful")
       // useAlertenvokefunction("Login Successful")
+      return setsucess(true);
 
       // setalert(true)
       // setmessage('Login Successful')
+    }else{
+
+      setvariantl('danger')
+      setmessagel("User Login UnSuccessful")
+
     }
-      // console.log(res);
-      //   console.log(r);
-  
-      return response;
+   
 
   } catch (error) {
         console.log(error)
@@ -65,7 +69,7 @@ export default function LoginContext({children}) {
       // console.log(auth)
             setauth(resp);
 
-    const response=await fetch("http://localhost:3200/api/auth/getuser",{
+    const response=await fetch("https://cloudnote-backend-etc8.onrender.com/api/auth/getuser",{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -97,10 +101,11 @@ export default function LoginContext({children}) {
   
       console.log(JSON.stringify(formdata))
   
-      const response=await fetch("http://localhost:3200/api/auth/reg",{
+      const response=await fetch("https://cloudnote-backend-etc8.onrender.com/api/auth/reg",{
        method:'POST',
        headers:{
-         'Content-Type':'application/json'
+         'Content-Type':'application/json',
+         'Access-Control-Allow-Origin':'*'
        },
        body:JSON.stringify(formdata)
        
@@ -108,23 +113,21 @@ export default function LoginContext({children}) {
    const res=await response.json()
   
   
-  if(response.status!==400){
-    // setalert(true)
-    // setmessage('User Registered Succesfully')
-    // Alertenvoke("Login Successful")
-    return response;
+  if(response.ok){
+    setmessagel("User Register Successful")
+
+    const set=await setsucess(true);
   
   }else{
-    // setalert(true)
-    // // setmessage(res)
-    // // Alertenvoke(res)
-    // return response;
+    setvariantl('danger')
+    setmessagel("User Register Unuccessful, ID unavailable")
+
+   const aw=await setsucess(false)
   
   }
   
   
    
-       console.log(res);
     } catch (error) {
       
       console.log(error)
@@ -136,13 +139,19 @@ export default function LoginContext({children}) {
 
     const [loginid,setid]=useLocalStoragehook("id",' ');
     const [auth,setauth]=useLocalStoragehook("auth",' ');
-    const [name,setname]=useLocalStoragehook("name",' ')
+    const [name,setname]=useLocalStoragehook("name",' ');
+    const [success,setsucess]=useState(false);
+    // const {setalert,setmessage,setvariant}=useNotes()
+
+    const [messagefromlogin,setmessagel]=useState()
+
+    const [setvariantfromlogin,setvariantl]=useState()
 
 
   return (
     <LogContext.Provider
     value={{
-         setid,loginid,loginauser,reggisterauser,auth,setauth,name,setname
+         setid,loginid,loginauser,reggisterauser,auth,setauth,name,setname,success,setsucess,messagefromlogin,setvariantfromlogin,setmessagel,setvariantl
     }}
   >
     {children}

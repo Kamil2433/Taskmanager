@@ -5,7 +5,7 @@ import { useNotes } from '../Context/NotesContext'
 import Updatenodemodal from './Updatenotemodal'
 import { useState } from 'react'
 
-export default function Note({title,desc,id}) {
+export default function Note({title,desc,id,date}) {
 
 
 
@@ -24,7 +24,7 @@ export default function Note({title,desc,id}) {
       setupdate(false)
     }
 
-
+  // const datetoadded=new Date(date);
 
   return (
 
@@ -50,6 +50,9 @@ export default function Note({title,desc,id}) {
          {desc}
         </Card.Text>
 
+        <Card.Text>
+         {date}
+        </Card.Text>
         <div className='float-right'>
         <i class="fa-regular fa-pen-to-square" style={{color: "#3170dd",marginRight:"15px"}} onClick={()=>setupdate(true)}></i>
         <i class="fa-solid fa-trash" style={{color: "#4070c4",}}   onClick={()=>{deletenote(id)}}></i></div>

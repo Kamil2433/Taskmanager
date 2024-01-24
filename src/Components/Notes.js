@@ -25,7 +25,7 @@ export default function Notes({ given }) {
 
     <div className="mt-5 m-5" style={{marginTop:"20%",paddingTop:"80px"}}>
       <Button className="primary " onClick={() => setmodal(true)}>
-        Add New Note
+        Add New Task
       </Button>
       </div>
 
@@ -40,10 +40,10 @@ export default function Notes({ given }) {
            temp.map((note, idx) => {
     
             // console.log("hii",note.title);
-            return <Note  title={note.title} desc={note.description} id={note._id}   />
+            return <Note  title={note.title} desc={note.description} id={note._id} date={note.date}  />
             // <Note  title={element.title} desc={element.description} />
           }):
-          <div>No Notes Created</div>}
+          <div>No Task Created</div>}
         </div>
         
     </>

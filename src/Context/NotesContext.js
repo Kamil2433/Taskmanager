@@ -24,30 +24,30 @@ export default function Notescontext({children}) {
 
 
 
-    async function addnote(inputtitle,inputdescription){
+    async function addnote(inputtitle,inputdescription,selecteddate){
 
-      const response=await fetch("http://localhost:3200/api/notes/addnote",{
+      const response=await fetch("https://cloudnote-backend-etc8.onrender.com/api/notes/addnote",{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
           'Access-Control-Allow-Origin':'*',
           'auth-token':`${auth}`,
         },
-        body:JSON.stringify({title:inputtitle,description:inputdescription})
+        body:JSON.stringify({title:inputtitle,description:inputdescription,date:selecteddate})
         
       });
     const res=await response.json()
 
     if(notes.length===0){
-      setnotes(res)
+   await setnotes(res)
     }else{
 
-      setnotes(notes.push(res))
+   await setnotes(notes.push(res))
     }
-        console.log(notes)
+      
 
         setalert(true)
-        setmessage('New Note Added')
+        setmessage('New Task Added')
 
 
         //  const output= await fetchnotes()
@@ -61,7 +61,7 @@ export default function Notescontext({children}) {
 
     async function fetchnotes(){
 
-      const response=await fetch("http://localhost:3200/api/notes/getnotes",{
+      const response=await fetch("https://cloudnote-backend-etc8.onrender.com/api/notes/getnotes",{
         method:'GET',
         headers:{
           'Content-Type':'application/json',
@@ -73,35 +73,34 @@ export default function Notescontext({children}) {
       });
     const res=await response.json()
         setnotes(res);
-        console.log(notes)
 
          
 
 
   }
 
-  async function updatenote(id,inputtitle,inputdesc){
+  async function updatenote(id,inputtitle,inputdesc,inputdate){
 
 
     console.log("here is the input to the fun",inputdesc,inputtitle)
 
-    const response=await fetch(`http://localhost:3200/api/notes/update/${id}`,{
+    const response=await fetch(`https://cloudnote-backend-etc8.onrender.com/api/notes/update/${id}`,{
       method:'PUT',
       headers:{
         'Content-Type':'application/json',
         'Access-Control-Allow-Origin':'*',
         'auth-token':`${auth}`,
       },
-      body:JSON.stringify({title:inputtitle,description:inputdesc})
+      body:JSON.stringify({title:inputtitle,description:inputdesc,date:inputdate})
       
     });
   const res=await response.json()
       
      
-      console.log(res);
+
       fetchnotes()
       setalert(true)
-      setmessage('Note Updated')
+      setmessage('Task Updated')
 
 
 }
@@ -111,7 +110,7 @@ async function deletenote(id){
 
   // console.log("here is the input to the fun",inputdesc,inputtitle)
 
-  const response=await fetch(`http://localhost:3200/api/notes/delete/${id}`,{
+  const response=await fetch(`https://cloudnote-backend-etc8.onrender.com/api/notes/delete/${id}`,{
     method:'DELETE',
     headers:{
       'Content-Type':'application/json',
@@ -124,12 +123,11 @@ async function deletenote(id){
 const res=await response.json()
     
    
-    console.log(res);
     fetchnotes()
 
 
     setalert(true)
-    setmessage('Note Deleted')
+    setmessage('Task Deleted')
 
 
 }
